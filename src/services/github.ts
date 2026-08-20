@@ -1,6 +1,11 @@
+const headers = {
+  Authorization: `Bearer ${import.meta.env.VITE_GITHUB_TOKEN}`,
+};
+
 export async function getRepository(owner: string, repository: string) {
   const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repository}`
+    `https://api.github.com/repos/${owner}/${repository}`,
+    { headers }
   );
 
   if (!response.ok) {
@@ -15,7 +20,8 @@ export async function getRepositoryFiles(
   branch: string
 ) {
   const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repository}/git/trees/${branch}?recursive=1`
+    `https://api.github.com/repos/${owner}/${repository}/git/trees/${branch}?recursive=1`,
+    { headers }
   );
 
   if (!response.ok) {
@@ -31,7 +37,8 @@ export async function getFileContent(
   path: string
 ) {
   const response = await fetch(
-    `https://api.github.com/repos/${owner}/${repository}/contents/${path}`
+    `https://api.github.com/repos/${owner}/${repository}/contents/${path}`,
+    { headers }
   );
 
   if (!response.ok) {

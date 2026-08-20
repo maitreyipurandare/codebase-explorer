@@ -18,7 +18,7 @@ interface CodebaseGraphProps {
 function CodebaseGraph({ nodes, edges, onNodeClick }: CodebaseGraphProps) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
-      <ReactFlow nodes={nodes} edges={edges} onNodeClick={onNodeClick}>
+      <ReactFlow nodes={nodes} edges={edges} onNodeClick={onNodeClick} fitView>
         <Background />
         <Controls />
       </ReactFlow>

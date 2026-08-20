@@ -18,6 +18,8 @@ function App() {
   const [selectedFileId, setSelectedFileId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [codebase, setCodebase] = useState<Codebase>(sampleCodebase);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [isExploring, setIsExploring] = useState(false);
 
   const selectedFile = codebase.files.find(
     (file) => file.id === selectedFileId
@@ -90,11 +92,13 @@ function App() {
       id: `edge-${index}`,
       source: relationship.source,
       target: relationship.target,
-      label: relationship.type,
+      label: isConnected ? relationship.type : undefined,
       markerEnd: {
         type: "arrowclosed",
+        color: "#000",
       },
       style: {
+        stroke: "#000",
         strokeWidth: isConnected ? 3 : 1,
         opacity: selectedFileId === null || isConnected ? 1 : 0.2,
       },
@@ -102,6 +106,9 @@ function App() {
   });
 
   async function handleExplore() {
+    setStatusMessage(null);
+    setIsExploring(true);
+
     try {
       const url = new URL(repositoryUrl);
       const parts = url.pathname.split("/").filter(Boolean);
@@ -149,9 +156,25 @@ function App() {
       console.log("REPOSITORY:", repoData);
       console.log("FILES:", files);
 
+      if (newCodebase.files.length === 0) {
+        setStatusMessage(
+          "No JavaScript/TypeScript files found in this repository."
+        );
+      } else {
+        setStatusMessage(null);
+      }
+
       setExploredRepository(repositoryUrl);
     } catch (error) {
       console.error("Github ERROR: ", error);
+
+      if (error instanceof Error) {
+        setStatusMessage(error.message);
+      } else {
+        setStatusMessage("Something went wrong exploring this repository.");
+      }
+    } finally {
+      setIsExploring(false);
     }
   }
 
@@ -171,8 +194,12 @@ function App() {
             value={repositoryUrl}
             onChange={(event) => setRepositoryUrl(event.target.value)}
           />
-          <button onClick={handleExplore}>Explore</button>
+          <button onClick={handleExplore} disabled={isExploring}>
+            {isExploring ? "Exploring..." : "Explore"}
+          </button>
         </div>
+
+        {statusMessage && <p className="status-message">{statusMessage}</p>}
 
         <div className="search-input">
           <input
