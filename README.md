@@ -40,3 +40,7 @@ Start the development server:
 npm run dev
 
 Then open the local URL provided by Vite in your browser.
+
+Why I built this:
+
+Jumping into an unfamiliar codebase can be dificult, and reading through files one at a time doesn't tell you how they relate to each other. Codebase Explorer gives a visual entry point into a repo's structure: see the whole dependency graph at a glance, then focus on individual files without leaving the map.
