@@ -127,10 +127,10 @@ function App() {
         repoData.default_branch
       );
 
-      console.log("TREE FILES:", files.tree);
+      // console.log("TREE FILES:", files.tree);
 
       const newCodebase = await buildCodebase(owner, repository, files.tree);
-      console.log("NEW CODEBASE:", newCodebase);
+      // console.log("NEW CODEBASE:", newCodebase);
 
       setCodebase(newCodebase);
 
@@ -146,15 +146,15 @@ function App() {
       if (firstFile) {
         const content = await getFileContent(owner, repository, firstFile.path);
 
-        console.log("FILE:", firstFile.path);
-        console.log("CONTENT:", content);
+        // console.log("FILE:", firstFile.path);
+        // console.log("CONTENT:", content);
 
         const imports = findImports(content);
 
-        console.log("IMPORTS:", imports);
+        // console.log("IMPORTS:", imports);
       }
-      console.log("REPOSITORY:", repoData);
-      console.log("FILES:", files);
+      // console.log("REPOSITORY:", repoData);
+      // console.log("FILES:", files);
 
       if (newCodebase.files.length === 0) {
         setStatusMessage(

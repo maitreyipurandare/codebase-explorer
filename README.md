@@ -1,32 +1,42 @@
-# React + TypeScript + Vite
+Codebase Explorer:
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+An interactive web application that visualizes the relationships between files in a GitHub repository. Users can enter a public GitHub repository, explore its file structure as an interactive dependency graph, search for files, and inspect source code and import relationships.
 
-Currently, two official plugins are available:
+Features:
+GitHub Repository Analysis
+Interactive Dependency Graph
+File Search
+File Details
+Import Relationships
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Tech Stack:
+React
+TypeScript
+Vite
+React Flow
+GitHub REST API
+CSS
 
-## React Compiler
+How It Works:
+The user enters a public GitHub repository URL.
+The application retrieves the repository's file tree using the GitHub API.
+Source files are downloaded and analyzed for import statements.
+Import paths are matched to files within the repository.
+The resulting files and relationships are represented as a graph.
+Users can select, search, and explore individual files and their dependencies.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Getting started:
+Clone the repository.
 
-## Expanding the Oxlint configuration
+git clone (https://github.com/maitreyipurandare/codebase-explorer)
+cd codebase-explorer
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Install dependencies:
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+npm install
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Start the development server:
+
+npm run dev
+
+Then open the local URL provided by Vite in your browser.
